@@ -12,6 +12,8 @@ Guilherme Nascimento, Guilherme Nigri e Guilherme Saraiva
 
 # Tarefas a serem feitas
 
+- Definir um tema e escolher a api para ser utilizada
+
 # Api utilizada
 
 # Retrospectiva
