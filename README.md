@@ -16,7 +16,7 @@ O usuário acessará o aplicativo para saber a cotação de uma moeda, e poderá
 
 # Tarefas a serem feitas
 
-- Definir um tema e escolher a api para ser utilizada
+- Definir um tema e escolher a api para ser utilizada :heavy_check_mark:
 
 # Api's
 
