@@ -4,7 +4,7 @@ Projeto de Bloco - INFNET
 
 # Integrantes
 
-Guilherme Nascimento, Guilherme Nigri e Guilherme Saraiva
+Guilherme Nascimento, Guilherme Nigri e Guilherme Saraiva(PO)
 
 # Asssunto
 
