@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/listaMoedasFragment">
+
+    <fragment
+        android:id="@+id/listaMoedasFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.Fragments.ListaMoedasFragment"
+        android:label="fragment_lista_moedas"
+        tools:layout="@layout/fragment_lista_moedas" >
+        <action
+            android:id="@+id/action_listaMoedasFragment_to_calculadoraConversaoFragment"
+            app:destination="@id/calculadoraConversaoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculadoraConversaoFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.CalculadoraConversaoFragment"
+        android:label="fragment_calculadora_conversao"
+        tools:layout="@layout/fragment_calculadora_conversao" />
+</navigation>
