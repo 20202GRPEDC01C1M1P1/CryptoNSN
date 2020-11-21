@@ -10,10 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_login.setOnClickListener{
-            val intent = Intent(this,CotacoesActivity::class.java)
-            startActivity(intent)
-        }
+
 
     }
 }

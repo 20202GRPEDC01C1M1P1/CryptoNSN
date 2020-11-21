@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/calculadoraConversaoFragment"
-        android:name="br.pro.nigri.projetoblocoandroid.CalculadoraConversaoFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.Fragments.CalculadoraConversaoFragment"
         android:label="fragment_calculadora_conversao"
         tools:layout="@layout/fragment_calculadora_conversao" />
 </navigation>
