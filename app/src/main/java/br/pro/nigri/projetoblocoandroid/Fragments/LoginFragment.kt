@@ -40,27 +40,37 @@ class LoginFragment : Fragment() {
             var email = txtLogin.text.toString()
             var senha = txtSenha.text.toString()
 
-            viewModelFactory = ViewModelFactory()
-            activity?.let {
-                viewModel =
-                    ViewModelProvider(it, viewModelFactory) // MainActivity
-                        .get(LoginViewModel::class.java)
-            }
+            if (email.isNotEmpty() && senha.isNotEmpty()){
+                viewModelFactory = ViewModelFactory()
+                activity?.let {
+                    viewModel =
+                        ViewModelProvider(it, viewModelFactory) // MainActivity
+                            .get(LoginViewModel::class.java)
+                }
 
-            var result = viewModel.logar(email, senha)
+                var result = viewModel.logar(email, senha)
 
-            result.addOnSuccessListener {
-                startActivity(
-                    Intent(activity, CotacoesActivity::class.java)
-                )
-            }
-            result.addOnFailureListener {
+                result.addOnSuccessListener {
+                    startActivity(
+                        Intent(activity, CotacoesActivity::class.java)
+                    )
+                }
+                result.addOnFailureListener {
+                    Toast.makeText(
+                        requireContext(),
+                        it.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }else{
                 Toast.makeText(
                     requireContext(),
-                    it.message,
+                    "Todos os campos devem ser preenchidos",
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+
         }
 
 
