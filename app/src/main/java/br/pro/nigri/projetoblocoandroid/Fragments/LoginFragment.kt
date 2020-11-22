@@ -1,17 +1,25 @@
 package br.pro.nigri.projetoblocoandroid.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import br.pro.nigri.projetoblocoandroid.CotacoesActivity
 import br.pro.nigri.projetoblocoandroid.R
+import br.pro.nigri.projetoblocoandroid.ViewModel.LoginViewModel
+import br.pro.nigri.projetoblocoandroid.ViewModel.UsuarioCreateEditViewModel
+import br.pro.nigri.projetoblocoandroid.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment() {
-
+    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +34,33 @@ class LoginFragment : Fragment() {
 
         txtBtnCadastrar.setOnClickListener{
             findNavController().navigate(R.id.cadastroFragment)
+        }
+
+        btnAcessarLogin.setOnClickListener {
+            var email = txtLogin.text.toString()
+            var senha = txtSenha.text.toString()
+
+            viewModelFactory = ViewModelFactory()
+            activity?.let {
+                viewModel =
+                    ViewModelProvider(it, viewModelFactory) // MainActivity
+                        .get(LoginViewModel::class.java)
+            }
+
+            var result = viewModel.logar(email, senha)
+
+            result.addOnSuccessListener {
+                startActivity(
+                    Intent(activity, CotacoesActivity::class.java)
+                )
+            }
+            result.addOnFailureListener {
+                Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
 

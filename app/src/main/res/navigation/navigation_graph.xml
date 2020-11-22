@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listaMoedasFragment"
         android:name="br.pro.nigri.projetoblocoandroid.Fragments.ListaMoedasFragment"
-        android:label="fragment_lista_moedas"
+        android:label="Crypto Moedas"
         tools:layout="@layout/fragment_lista_moedas" >
         <action
             android:id="@+id/action_listaMoedasFragment_to_calculadoraConversaoFragment"
@@ -17,6 +17,16 @@
     <fragment
         android:id="@+id/calculadoraConversaoFragment"
         android:name="br.pro.nigri.projetoblocoandroid.Fragments.CalculadoraConversaoFragment"
-        android:label="fragment_calculadora_conversao"
+        android:label="Calculadora de conversão"
         tools:layout="@layout/fragment_calculadora_conversao" />
+    <fragment
+        android:id="@+id/contaFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.ContaFragment"
+        android:label="Conta"
+        tools:layout="@layout/fragment_conta" />
+    <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.FavoritosFragment"
+        android:label="Moedas Favoritas"
+        tools:layout="@layout/fragment_favoritos" />
 </navigation>
