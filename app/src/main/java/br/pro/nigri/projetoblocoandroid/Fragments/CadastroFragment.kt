@@ -9,15 +9,14 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.pro.nigri.projetoblocoandroid.R
-import br.pro.nigri.projetoblocoandroid.ViewModel.UsuarioCreateEditViewModel
+import br.pro.nigri.projetoblocoandroid.ViewModel.UsuarioCRUDViewModel
 import br.pro.nigri.projetoblocoandroid.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_cadastro.*
-import kotlinx.android.synthetic.main.fragment_login.*
 
 class CadastroFragment : Fragment() {
 
-    private lateinit var viewModel: UsuarioCreateEditViewModel
+    private lateinit var viewModel: UsuarioCRUDViewModel
     private lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
@@ -35,7 +34,7 @@ class CadastroFragment : Fragment() {
         activity?.let {
             viewModel =
                 ViewModelProvider(it, viewModelFactory) // MainActivity
-                    .get(UsuarioCreateEditViewModel::class.java)
+                    .get(UsuarioCRUDViewModel::class.java)
         }
         btnCadastrarUsuario.setOnClickListener {
             var nome = txtNomeCadastrar.text.toString()

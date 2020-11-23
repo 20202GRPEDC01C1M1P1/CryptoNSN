@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_loginFragment_to_cadastroFragment"
             app:destination="@id/cadastroFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_redefinirSenhaFragment"
+            app:destination="@id/redefinirSenhaFragment" />
     </fragment>
     <fragment
         android:id="@+id/cadastroFragment"
         android:name="br.pro.nigri.projetoblocoandroid.Fragments.CadastroFragment"
         android:label="fragment_cadastro"
         tools:layout="@layout/fragment_cadastro" />
+    <fragment
+        android:id="@+id/redefinirSenhaFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.Fragments.RedefinirSenhaFragment"
+        android:label="fragment_redefinir_senha"
+        tools:layout="@layout/fragment_redefinir_senha" />
 </navigation>

@@ -21,12 +21,23 @@
         tools:layout="@layout/fragment_calculadora_conversao" />
     <fragment
         android:id="@+id/contaFragment"
+        android:launchMode="singleTop"
         android:name="br.pro.nigri.projetoblocoandroid.Fragments.ContaFragment"
         android:label="Editar Conta"
-        tools:layout="@layout/fragment_conta" />
+        tools:layout="@layout/fragment_conta" >
+        <action
+            android:id="@+id/action_contaFragment_to_alterarSenhaFragment"
+            app:destination="@id/alterarSenhaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="br.pro.nigri.projetoblocoandroid.Fragments.FavoritosFragment"
         android:label="Moedas Favoritas"
         tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/alterarSenhaFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.Fragments.AlterarSenhaFragment"
+        android:label="Alterar Senha"
+        android:parentActivityName="br.pro.nigri.projetoblocoandroid.Fragments.ContaFragment"
+        tools:layout="@layout/fragment_alterar_senha" />
 </navigation>

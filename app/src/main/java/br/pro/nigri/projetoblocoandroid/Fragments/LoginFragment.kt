@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import br.pro.nigri.projetoblocoandroid.CotacoesActivity
 import br.pro.nigri.projetoblocoandroid.R
 import br.pro.nigri.projetoblocoandroid.ViewModel.LoginViewModel
-import br.pro.nigri.projetoblocoandroid.ViewModel.UsuarioCreateEditViewModel
 import br.pro.nigri.projetoblocoandroid.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -70,7 +69,10 @@ class LoginFragment : Fragment() {
                 ).show()
             }
 
+        }
 
+        txtBtnEsqueciSenha.setOnClickListener {
+            findNavController().navigate(R.id.redefinirSenhaFragment)
         }
 
 
