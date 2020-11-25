@@ -11,9 +11,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.pro.nigri.projetoblocoandroid.Model.MoedaModel
 import br.pro.nigri.projetoblocoandroid.R
+import br.pro.nigri.projetoblocoandroid.ViewModel.MoedaViewModel
 import br.pro.nigri.projetoblocoandroid.ViewModelFactory
 
-class CotacaoAdapter(var listaMoedas:List<MoedaModel> = listOf()): RecyclerView.Adapter<CotacaoAdapter.MoedaViewHolder>() {
+class CotacaoAdapter(var listaMoedas:List<MoedaViewModel> = listOf()): RecyclerView.Adapter<CotacaoAdapter.MoedaViewHolder>() {
 
     class MoedaViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -35,13 +36,13 @@ class CotacaoAdapter(var listaMoedas:List<MoedaModel> = listOf()): RecyclerView.
 
     override fun onBindViewHolder(holder: MoedaViewHolder, position: Int) {
 
-        holder.nomeMoeda.text = listaMoedas[position].Moeda
-        holder.cotacaoMoeda.text = listaMoedas[position].Cotacao.toString()
+        holder.nomeMoeda.text = listaMoedas[position].base
+        holder.cotacaoMoeda.text = listaMoedas[position].price.toString()
 
     }
 
 
-    fun atualizarDados(moedas: List<MoedaModel>)
+    fun atualizarDados(moedas: List<MoedaViewModel>)
     {
         listaMoedas = moedas
 
