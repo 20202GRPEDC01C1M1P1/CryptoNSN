@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_money"
         android:title="Moedas" />
     <item
+        android:id="@+id/calculadoraConversaoFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_calc"
+        android:title="Calculadora" />
+    <item
         android:id="@+id/favoritosFragment"
         android:enabled="true"
         android:icon="@android:drawable/btn_star"

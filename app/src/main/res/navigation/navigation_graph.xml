@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listaMoedasFragment_to_calculadoraConversaoFragment"
             app:destination="@id/calculadoraConversaoFragment" />
+        <action
+            android:id="@+id/action_listaMoedasFragment_to_moedaDetailsFragment"
+            app:destination="@id/moedaDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/calculadoraConversaoFragment"
@@ -40,4 +43,9 @@
         android:label="Alterar Senha"
         android:parentActivityName="br.pro.nigri.projetoblocoandroid.Fragments.ContaFragment"
         tools:layout="@layout/fragment_alterar_senha" />
+    <fragment
+        android:id="@+id/moedaDetailsFragment"
+        android:name="br.pro.nigri.projetoblocoandroid.Fragments.MoedaDetailsFragment"
+        android:label="Detalhes"
+        tools:layout="@layout/fragment_moeda_details" />
 </navigation>

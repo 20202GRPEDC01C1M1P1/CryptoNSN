@@ -35,18 +35,12 @@ class ListaMoedasFragment : Fragment() {
         configurarRecyclerView()
         popular()
 
-        btn_calc_conversao.setOnClickListener{
-            findNavController().navigate(R.id.calculadoraConversaoFragment)
-        }
-
-
-
     }
 
     private fun configurarRecyclerView() {
         lista_moedas.layoutManager =
             LinearLayoutManager(activity)
-        lista_moedas.adapter = CotacaoAdapter()
+        lista_moedas.adapter = CotacaoAdapter(requireContext(),findNavController())
     }
 
     private fun popular(){
@@ -57,7 +51,7 @@ class ListaMoedasFragment : Fragment() {
                     .get(ListCotacoesViewModel::class.java)
         }
 
-        listCotacoesViewModel.chamarApi()
+        listCotacoesViewModel.chamarApi(requireContext())
 
         listCotacoesViewModel.listaHome.observe(viewLifecycleOwner, Observer {lista-> if (lista != null){
         }
@@ -67,6 +61,7 @@ class ListaMoedasFragment : Fragment() {
 
                 if (adapter is CotacaoAdapter){
                     adapter.atualizarDados(lista)
+                    txtUltimaAtualizacao.text = listCotacoesViewModel.atualizacao
                 }
             }
 

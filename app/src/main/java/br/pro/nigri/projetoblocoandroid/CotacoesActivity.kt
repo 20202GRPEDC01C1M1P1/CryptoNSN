@@ -17,7 +17,7 @@ class CotacoesActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.fragmentCotacoes)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.listaMoedasFragment,R.id.favoritosFragment,R.id.contaFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.listaMoedasFragment,R.id.calculadoraConversaoFragment,R.id.favoritosFragment,R.id.contaFragment))
         setupActionBarWithNavController(navController,appBarConfiguration)
 
         bottomNavigationView.setupWithNavController(navController)
