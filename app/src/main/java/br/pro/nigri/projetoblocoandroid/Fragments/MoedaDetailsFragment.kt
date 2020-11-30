@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import br.pro.nigri.projetoblocoandroid.Model.MoedaModel
 import br.pro.nigri.projetoblocoandroid.R
@@ -41,5 +42,24 @@ class MoedaDetailsFragment : Fragment() {
         txtNomeMoedaDetails.text = "Moeda: ${model?.base}"
         txtAlteracaoMoedaDetails.text = "Alteração: ${model?.change.toString()}"
         txtValorMoedaDetails.text = "Valor (BRL): ${model?.price.toString()}"
+
+        btnAddMoedaFav.setOnClickListener {
+            var result = moedasFavoritasCRUDViewModel.addFav(model!!.base!!)
+            result.addOnSuccessListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Moeda Adicionada como Favorita com Sucesso!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            result.addOnFailureListener {
+                Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 }

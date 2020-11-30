@@ -25,7 +25,9 @@ class ListCotacoesViewModel():ViewModel() {
 
     private var cotacoes: MutableList<MoedaViewModel>? = ArrayList()
     var listaHome = MutableLiveData<List<MoedaViewModel>>()
+    var listaFav = MutableLiveData<List<MoedaViewModel>>()
     var atualizacao:String?=null
+
     var listaCryptos = mutableListOf(
         "btc-brl",
         "eth-brl",
@@ -38,36 +40,59 @@ class ListCotacoesViewModel():ViewModel() {
         "bnb-brl"
     )
 
-    fun chamarApi(context: Context) {
+    fun chamarApiListaHome(context: Context) {
         cotacoes!!.clear()
 
         listaCryptos.forEach {
+            chamarApiCentral(it,"home",context)
 
-            var call = RetroFitClient.getCryptoService().getCryptoCurrency(it)
-            call.enqueue(
-                object : Callback<MoedasListViewModel> {
-
-                    @RequiresApi(Build.VERSION_CODES.O)
-                    override fun onResponse(
-                        call: Call<MoedasListViewModel>,
-                        response: Response<MoedasListViewModel>
-                    ) {
-                        var cryptoMoedas = response.body()
-
-                        var lista: MutableList<MoedaViewModel>
-                        lista = appendToList(cryptoMoedas?.ticker!!)
-                        listaHome.value = lista
-
-                        atualizacao = FormatDateTime()
-                    }
-
-                    override fun onFailure(call: Call<MoedasListViewModel>, t: Throwable) {
-                        Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-                        atualizacao = "Falha"
-                    }
-                }
-            )
         }
+
+    }
+
+    fun chamarApiListaFavoritos(listaFavFirebase:List<MoedaViewModel>,context: Context): MutableLiveData<List<MoedaViewModel>> {
+        cotacoes!!.clear()
+
+        listaFavFirebase.forEach {
+            chamarApiCentral("${it.base!!}-brl","fav",context)
+        }
+        return listaFav
+    }
+
+    fun chamarApiCentral(moeda:String,tipoLista:String, context:Context)
+    {
+        var call = RetroFitClient.getCryptoService().getCryptoCurrency(moeda)
+
+        call.enqueue(
+            object : Callback<MoedasListViewModel> {
+
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onResponse(
+                    call: Call<MoedasListViewModel>,
+                    response: Response<MoedasListViewModel>
+                ) {
+                    var cryptoMoedas = response.body()
+
+                    var lista: List<MoedaViewModel>
+
+                    lista = appendToList(cryptoMoedas?.ticker!!)
+
+                    if (tipoLista == "home"){
+                        listaHome.value = lista
+                        atualizacao = FormatDateTime()
+                    }else{
+                        listaFav.value = lista
+                    }
+
+                }
+
+                override fun onFailure(call: Call<MoedasListViewModel>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    atualizacao = "Falha"
+                }
+            }
+        )
+
 
     }
 

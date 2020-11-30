@@ -5,4 +5,15 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.FavoritosFragment" />
+    tools:context=".Fragments.FavoritosFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_favoritos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/moedas_card" />
+</androidx.constraintlayout.widget.ConstraintLayout>

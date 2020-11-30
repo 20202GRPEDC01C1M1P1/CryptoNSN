@@ -51,7 +51,7 @@ class ListaMoedasFragment : Fragment() {
                     .get(ListCotacoesViewModel::class.java)
         }
 
-        listCotacoesViewModel.chamarApi(requireContext())
+        listCotacoesViewModel.chamarApiListaHome(requireContext())
 
         listCotacoesViewModel.listaHome.observe(viewLifecycleOwner, Observer {lista-> if (lista != null){
         }
