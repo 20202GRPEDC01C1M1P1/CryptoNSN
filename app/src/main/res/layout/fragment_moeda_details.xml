@@ -68,7 +68,7 @@
         android:layout_width="49dp"
         android:layout_height="49dp"
         android:layout_marginTop="100dp"
-        android:src="@drawable/ic_baseline_update_24"
+        android:src="@drawable/ic_baseline_update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toBottomOf="@+id/txtAlteracaoMoedaDetails"

@@ -49,45 +49,17 @@ class MoedaDetailsFragment : Fragment() {
 
             btnAddMoedaFav.setOnClickListener { view ->
                 if(statusFavoritos!!){
-                    var result = moedasFavoritasCRUDViewModel.removerFav(it.base!!)
-                    result.addOnSuccessListener { void ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Moeda removida dos favoritos com sucesso!",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        verificarFavoritos(it.base!!)
-                    }
-
-                    result.addOnFailureListener {
-                        Toast.makeText(
-                            requireContext(),
-                            it.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    actionRemoveFavorito(it.base!!)
                 }
                 else
                 {
-                    var result = moedasFavoritasCRUDViewModel.addFav(it.base!!)
-                    result.addOnSuccessListener { void ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Moeda Adicionada como Favorita com Sucesso!",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        verificarFavoritos(it.base!!)
-                    }
-
-                    result.addOnFailureListener {
-                        Toast.makeText(
-                            requireContext(),
-                            it.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    actionAddFavorito(it.base!!)
                 }
 
+            }
+
+            btnAtualizarDetails.setOnClickListener { view ->
+                updateInfo(it.base!!)
             }
         })
     }
@@ -105,6 +77,50 @@ class MoedaDetailsFragment : Fragment() {
                 btnAddMoedaFav.isClickable = true
 
             }
+        }
+    }
+
+    private fun updateInfo(moeda:String){
+        moedasFavoritasCRUDViewModel.getCryptoDetails(moeda,"brl",requireContext())
+    }
+
+    private fun actionAddFavorito(moeda:String){
+        var result = moedasFavoritasCRUDViewModel.addFav(moeda)
+        result.addOnSuccessListener { void ->
+            Toast.makeText(
+                requireContext(),
+                "Moeda Adicionada como Favorita com Sucesso!",
+                Toast.LENGTH_LONG
+            ).show()
+            verificarFavoritos(moeda)
+        }
+
+        result.addOnFailureListener {
+            Toast.makeText(
+                requireContext(),
+                it.message,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private fun actionRemoveFavorito(moeda:String){
+        var result = moedasFavoritasCRUDViewModel.removerFav(moeda)
+        result.addOnSuccessListener { void ->
+            Toast.makeText(
+                requireContext(),
+                "Moeda removida dos favoritos com sucesso!",
+                Toast.LENGTH_LONG
+            ).show()
+            verificarFavoritos(moeda)
+        }
+
+        result.addOnFailureListener {
+            Toast.makeText(
+                requireContext(),
+                it.message,
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }
