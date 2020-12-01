@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/listaMoedasFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_money"
+        android:title="Moedas" />
+    <item
+        android:id="@+id/calculadoraConversaoFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_calc"
+        android:title="Calculadora" />
+    <item
+        android:id="@+id/favoritosFragment"
+        android:enabled="true"
+        android:icon="@android:drawable/btn_star"
+        android:title="Favoritos" />
+    <item
+        android:id="@+id/contaFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_user_person"
+        android:title="Conta" />
+</menu>

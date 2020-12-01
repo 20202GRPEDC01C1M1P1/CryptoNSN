@@ -3,6 +3,7 @@ package br.pro.nigri.projetoblocoandroid.Model
 import java.io.Serializable
 
 class MoedaModel (
-    var Moeda:String,
-    var Cotacao:Double
-):Serializable
+    var base:String? = null,
+    var price:Double? = null,
+    var change:Double? = null
+)

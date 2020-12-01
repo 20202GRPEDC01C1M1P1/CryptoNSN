@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "821488392642",
+    "firebase_url": "https://cryptonsn-55f8b.firebaseio.com",
+    "project_id": "cryptonsn-55f8b",
+    "storage_bucket": "cryptonsn-55f8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821488392642:android:59fb66cfd9a9a2eccd9e5b",
+        "android_client_info": {
+          "package_name": "br.pro.nigri.projetoblocoandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "821488392642-negjrefvnrqoipqjpoknbiovh9v0ktdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6N6bTLurPUnamzxAaoVso7feKq8H13T8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "821488392642-negjrefvnrqoipqjpoknbiovh9v0ktdf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
