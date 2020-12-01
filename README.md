@@ -21,8 +21,6 @@ O usuário acessará o aplicativo para saber as cotações das principais cripto
 
 # Api's
 
-- https://www.cryptonator.com/api/ 
-- https://fixer.io/
-- https://1forge.com/api
+- https://www.cryptonator.com/api/
 
 # Retrospectiva
