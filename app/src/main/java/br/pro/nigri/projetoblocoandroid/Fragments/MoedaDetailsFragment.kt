@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.pro.nigri.projetoblocoandroid.Model.MoedaModel
 import br.pro.nigri.projetoblocoandroid.R
@@ -18,6 +19,7 @@ class MoedaDetailsFragment : Fragment() {
 
     private lateinit var moedasFavoritasCRUDViewModel: MoedasFavoritasCRUDViewModel
     private lateinit var viewModelFactory: ViewModelFactory
+    private var statusFavoritos:Boolean?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,28 +39,71 @@ class MoedaDetailsFragment : Fragment() {
                     .get(MoedasFavoritasCRUDViewModel::class.java)
         }
 
-        var model = moedasFavoritasCRUDViewModel.detailsMoeda
+        moedasFavoritasCRUDViewModel.detailsMoeda.observe(viewLifecycleOwner, Observer {
 
-        txtNomeMoedaDetails.text = "Moeda: ${model?.base}"
-        txtAlteracaoMoedaDetails.text = "Alteração: ${model?.change.toString()}"
-        txtValorMoedaDetails.text = "Valor (BRL): ${model?.price.toString()}"
+            verificarFavoritos(it.base!!)
+            txtNomeMoedaDetails.text = "Moeda: ${it.base}"
+            txtAlteracaoMoedaDetails.text = "Alteração: ${it.change.toString()}"
+            txtValorMoedaDetails.text = "Valor (BRL): ${it.price.toString()}"
 
-        btnAddMoedaFav.setOnClickListener {
-            var result = moedasFavoritasCRUDViewModel.addFav(model!!.base!!)
-            result.addOnSuccessListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Moeda Adicionada como Favorita com Sucesso!",
-                    Toast.LENGTH_LONG
-                ).show()
+
+            btnAddMoedaFav.setOnClickListener { view ->
+                if(statusFavoritos!!){
+                    var result = moedasFavoritasCRUDViewModel.removerFav(it.base!!)
+                    result.addOnSuccessListener { void ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Moeda removida dos favoritos com sucesso!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        verificarFavoritos(it.base!!)
+                    }
+
+                    result.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(),
+                            it.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+                else
+                {
+                    var result = moedasFavoritasCRUDViewModel.addFav(it.base!!)
+                    result.addOnSuccessListener { void ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Moeda Adicionada como Favorita com Sucesso!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        verificarFavoritos(it.base!!)
+                    }
+
+                    result.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(),
+                            it.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
             }
+        })
+    }
 
-            result.addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    it.message,
-                    Toast.LENGTH_LONG
-                ).show()
+    private fun verificarFavoritos(moeda:String){
+        moedasFavoritasCRUDViewModel.checkFav(moeda){
+            if (!it.isEmpty) {
+                statusFavoritos = true
+                btnAddMoedaFav.text = "Remover dos favoritos"
+                btnAddMoedaFav.isClickable = true
+
+            }else{
+                statusFavoritos = false
+                btnAddMoedaFav.text = "Adicionar moeda aos favoritos"
+                btnAddMoedaFav.isClickable = true
+
             }
         }
     }

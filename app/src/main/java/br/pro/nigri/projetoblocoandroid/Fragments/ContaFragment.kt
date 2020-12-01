@@ -36,6 +36,7 @@ class ContaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBarConta.visibility = View.VISIBLE
         viewModelFactory = ViewModelFactory()
         activity?.let {
             usuarioCRUDViewModel =
@@ -97,5 +98,6 @@ class ContaFragment : Fragment() {
                     Intent(requireContext(), MainActivity::class.java)
                 )
             }
+        progressBarConta.visibility = View.GONE
         }
     }

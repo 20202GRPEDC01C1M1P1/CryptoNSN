@@ -30,13 +30,12 @@ class MoedasFavoritasCRUDViewModel: ViewModel() {
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var collection = firebaseFirestore.collection("MoedasFavoritas")
     var idUser = FirebaseAuth.getInstance().currentUser!!.uid
-    var detailsMoeda: MoedaModel?=null
-    var listaFavoritos = MutableLiveData<List<MoedaViewModel>>()
+    var detailsMoeda = MutableLiveData<MoedaModel>()
 
+    fun getCryptoDetails(cryptoMoeda: String, moedaConvertida:String,context: Context){
 
-    fun getCryptoDetails(cryptoMoeda: String, context: Context){
+        var nameCrypto = "${cryptoMoeda}-${moedaConvertida}"
 
-        var nameCrypto = "${cryptoMoeda}-brl"
         var call = RetroFitClient.getCryptoService().getCryptoCurrency(nameCrypto)
         call.enqueue(
             object : Callback<MoedasListViewModel> {
@@ -47,7 +46,7 @@ class MoedasFavoritasCRUDViewModel: ViewModel() {
                     response: Response<MoedasListViewModel>
                 ) {
                     var cryptoMoedas = response.body()
-                    detailsMoeda = cryptoMoedas!!.ticker!!
+                    detailsMoeda!!.value = cryptoMoedas!!.ticker!!
                 }
 
                 override fun onFailure(call: Call<MoedasListViewModel>, t: Throwable) {
@@ -71,20 +70,37 @@ class MoedasFavoritasCRUDViewModel: ViewModel() {
         return taskFireStore
     }
 
-    fun getFavListByUser(context: Context){
+    fun removerFav(cryptoName:String):Task<Void>{
+
+        var document = collection.document("${idUser}-${cryptoName}")
+
+        var taskFireStore = document.delete()
+
+        return taskFireStore
+    }
+
+    fun getFavListByUser(context: Context, listCotacoesViewModel: ListCotacoesViewModel){
 
         var task = collection.whereEqualTo("user", idUser).get()
+
         task.addOnSuccessListener {
             val listaFavoritosFirebase = it.toObjects(MoedaViewModel::class.java)
 
-            var listCotacoesViewModel =
-                ViewModelProviders.of(context as FragmentActivity).get(ListCotacoesViewModel::class.java)
-
-            var listaDeFavoritos  = listCotacoesViewModel.chamarApiListaFavoritos(listaFavoritosFirebase,context)
-            listaFavoritos.value = listaDeFavoritos.value
+            listCotacoesViewModel.chamarApiListaFavoritos(listaFavoritosFirebase,context)
         }
+
         task.addOnFailureListener {
             Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun checkFav(moeda:String, actionClick: (QuerySnapshot) -> Unit){
+
+        var task = collection.whereEqualTo("user", idUser).whereEqualTo("base",moeda).get()
+
+        task.addOnSuccessListener {
+            actionClick(it)
+        }
+
     }
 }

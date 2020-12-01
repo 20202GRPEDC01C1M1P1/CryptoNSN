@@ -50,13 +50,12 @@ class ListCotacoesViewModel():ViewModel() {
 
     }
 
-    fun chamarApiListaFavoritos(listaFavFirebase:List<MoedaViewModel>,context: Context): MutableLiveData<List<MoedaViewModel>> {
+    fun chamarApiListaFavoritos(listaFavFirebase:List<MoedaViewModel>,context: Context) {
         cotacoes!!.clear()
 
         listaFavFirebase.forEach {
             chamarApiCentral("${it.base!!}-brl","fav",context)
         }
-        return listaFav
     }
 
     fun chamarApiCentral(moeda:String,tipoLista:String, context:Context)

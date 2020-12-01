@@ -21,9 +21,8 @@ import br.pro.nigri.projetoblocoandroid.ViewModelFactory
 
 
 class CotacaoAdapter(
-    var context: Context,
-    var navController: NavController,
-    var listaMoedas: List<MoedaViewModel> = listOf()
+    var listaMoedas: List<MoedaViewModel> = listOf(),
+    val actionClick: (String) -> Unit
 ): RecyclerView.Adapter<CotacaoAdapter.MoedaViewHolder>() {
 
 
@@ -52,13 +51,7 @@ class CotacaoAdapter(
         holder.cotacaoMoeda.text = listaMoedas[position].price.toString()
 
         holder.cardMoeda.setOnClickListener{
-
-            var moedasFavoritasCRUDViewModel =
-                ViewModelProviders.of(context as FragmentActivity).get(MoedasFavoritasCRUDViewModel::class.java)
-
-            moedasFavoritasCRUDViewModel.getCryptoDetails(holder.nomeMoeda.text.toString(),context)
-
-            navController.navigate(R.id.moedaDetailsFragment)
+            actionClick(listaMoedas[position].base!!)
         }
 
     }

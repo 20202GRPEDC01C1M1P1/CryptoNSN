@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.pro.nigri.projetoblocoandroid.Adapter.CotacaoAdapter
 import br.pro.nigri.projetoblocoandroid.R
 import br.pro.nigri.projetoblocoandroid.ViewModel.ListCotacoesViewModel
+import br.pro.nigri.projetoblocoandroid.ViewModel.MoedasFavoritasCRUDViewModel
 import br.pro.nigri.projetoblocoandroid.ViewModel.MoedasListViewModel
 import br.pro.nigri.projetoblocoandroid.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_lista_moedas.*
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_lista_moedas.*
 class ListaMoedasFragment : Fragment() {
 
     private lateinit var listCotacoesViewModel: ListCotacoesViewModel
+    private lateinit var moedasFavoritasCRUDViewModel: MoedasFavoritasCRUDViewModel
     private lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
@@ -32,6 +34,7 @@ class ListaMoedasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBarListHome.visibility = View.VISIBLE
         configurarRecyclerView()
         popular()
 
@@ -40,10 +43,23 @@ class ListaMoedasFragment : Fragment() {
     private fun configurarRecyclerView() {
         lista_moedas.layoutManager =
             LinearLayoutManager(activity)
-        lista_moedas.adapter = CotacaoAdapter(requireContext(),findNavController())
+        lista_moedas.adapter = CotacaoAdapter(){
+
+            viewModelFactory = ViewModelFactory()
+            activity?.let {
+                moedasFavoritasCRUDViewModel =
+                    ViewModelProvider(it, viewModelFactory) // MainActivity
+                        .get(MoedasFavoritasCRUDViewModel::class.java)
+            }
+
+            moedasFavoritasCRUDViewModel.getCryptoDetails(it,"brl",requireContext())
+
+            findNavController().navigate(R.id.moedaDetailsFragment)
+        }
     }
 
     private fun popular(){
+
         viewModelFactory = ViewModelFactory()
         activity?.let {
             listCotacoesViewModel =
@@ -62,10 +78,15 @@ class ListaMoedasFragment : Fragment() {
                 if (adapter is CotacaoAdapter){
                     adapter.atualizarDados(lista)
                     txtUltimaAtualizacao.text = listCotacoesViewModel.atualizacao
+                    progressBarListHome.visibility = View.GONE
+
                 }
             }
 
+
         })
+
+
     }
 
 }
