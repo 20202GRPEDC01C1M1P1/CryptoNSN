@@ -35,7 +35,7 @@ class MoedaDetailsFragment : Fragment() {
         viewModelFactory = ViewModelFactory()
         activity?.let {
             moedasFavoritasCRUDViewModel =
-                ViewModelProvider(it, viewModelFactory) // MainActivity
+                ViewModelProvider(it, viewModelFactory)
                     .get(MoedasFavoritasCRUDViewModel::class.java)
         }
 
