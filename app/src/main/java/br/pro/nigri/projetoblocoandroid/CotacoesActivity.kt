@@ -2,6 +2,7 @@ package br.pro.nigri.projetoblocoandroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -21,5 +22,14 @@ class CotacoesActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration)
 
         bottomNavigationView.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val navController = findNavController(R.id.fragmentCotacoes)
+
+        navController.popBackStack()
+
+        return super.onOptionsItemSelected(item)
     }
 }
